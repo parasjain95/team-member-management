@@ -13,14 +13,15 @@ const memberReducer = (state = [], action) => {
     case 'UPDATE_MEMBER':
       return state.map((member) => {
         if (member.id === action.id) {
-        return {
-          ...member,
-          fname: action.data.newFname,
-          lname: action.data.newLname,
-          email: action.data.newEmail,
-          mobile: action.data.newMobile,
-          editing: !member.editing
-        }
+          return {
+            ...member,
+            fname: action.data.newFname,
+            lname: action.data.newLname,
+            email: action.data.newEmail,
+            mobile: action.data.newMobile,
+            role: action.data.newRole,
+            editing: !member.editing
+          }
         } else return member;
       })
     default:

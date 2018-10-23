@@ -2,18 +2,28 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class AddMember extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+      role: "regular"
+    };
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     const fname = this.getFname.value;
     const lname = this.getLname.value;
     const email = this.getEmail.value;
     const mobile = this.getMobile.value;
+    const role = this.state.role;
     const data = {
       id: new Date(),
       fname,
       lname,
       email,
       mobile,
+      role,
       editing: false
     }
     this.props.dispatch({
@@ -24,6 +34,15 @@ class AddMember extends Component {
     this.getLname.value = '';
     this.getEmail.value = '';
     this.getMobile.value = '';
+    this.setState({
+      role: "regular"
+    });
+  }
+
+  handleRoleChange = (e) => {
+    this.setState({
+      role: e.target.value
+    });
   }
 
   handleCancelAdd = (e) => {
@@ -44,6 +63,14 @@ class AddMember extends Component {
           placeholder="Enter Email ID" /><br /><br />
           <input required type="number" ref={(input) => this.getMobile = input}
           placeholder="Enter Mobile Number" /><br /><br />
+          <label>
+            <input type="radio" value="admin" checked={this.state.role === "admin"} onChange={this.handleRoleChange} />
+            Admin(can delete other members)
+          </label>
+          <label>
+            <input type="radio" value="regular" checked={this.state.role === "regular"} onChange={this.handleRoleChange} />
+            Regular(can't delete other members)
+          </label>
           <button>SAVE</button>   <button onClick={this.handleCancelAdd}>CANCEL</button>
         </form>
       </div>

@@ -8,8 +8,6 @@ const memberReducer = (state = [], action) => {
       return state.map((member) => member.id === action.id ? { ...member, editing: !member.editing } : member)
     case 'CANCEL_EDIT':
       return state.map((member) => member.id === action.id ? { ...member, editing: !member.editing } : member)
-    case 'CANCEL_ADD':
-      return state.map((member) => member.id === action.id ? { ...member, editing: !member.editing } : member)
     case 'UPDATE_MEMBER':
       return state.map((member) => {
         if (member.id === action.id) {

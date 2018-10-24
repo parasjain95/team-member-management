@@ -35,7 +35,7 @@ class EditMember extends Component {
 
   handleCancelEdit = (e) => {
     e.preventDefault();
-    console.log('cancel edit');
+    this.props.dispatch({ type: 'CANCEL_EDIT', id: this.props.member.id})
   }
 
   render() {
@@ -58,8 +58,8 @@ class EditMember extends Component {
         <label>
           <input type="radio" value="regular" checked={this.state.role==="regular"} onChange={this.handleRoleChange} />
           Regular(can't delete other members)
-        </label>
-        <button>SAVE</button>   <button onClick={this.handleCancelEdit}>CANCEL</button>
+        </label><br/><br/>
+        <button>SAVE</button><br/><button onClick={this.handleCancelEdit}>CANCEL</button>
       </form>
     </div>
     );

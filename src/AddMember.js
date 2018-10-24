@@ -70,8 +70,8 @@ class AddMember extends Component {
           <label>
             <input type="radio" value="regular" checked={this.state.role === "regular"} onChange={this.handleRoleChange} />
             Regular(can't delete other members)
-          </label>
-          <button>SAVE</button>   <button onClick={this.handleCancelAdd}>CANCEL</button>
+          </label><br/><br/>
+          <button>SAVE</button>
         </form>
       </div>
     );

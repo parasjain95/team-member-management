@@ -77,6 +77,10 @@ body {
   font-size:40px;
   color:#636363;
   }
+
+  .center{
+    text-align:center;
+  }
   
   
   .form {

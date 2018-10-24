@@ -49,7 +49,7 @@ class EditMember extends Component {
         defaultValue={this.props.member.lname} placeholder="Enter Last Name" /><br /><br />
         <input required type="email" ref={(input) => this.getEmail = input}
         defaultValue={this.props.member.email} placeholder="Enter Email ID" /><br /><br />
-        <input required type="number" ref={(input) => this.getMobile = input}
+        <input required type="number" maxLength="10" ref={(input) => this.getMobile = input}
         defaultValue={this.props.member.mobile} placeholder="Enter Mobile Number" /><br /><br />
         <label>
           <input type="radio" value="admin" checked={this.state.role==="admin"} onChange={this.handleRoleChange} />

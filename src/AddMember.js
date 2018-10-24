@@ -61,7 +61,7 @@ class AddMember extends Component {
           placeholder="Enter Last Name" /><br /><br />
           <input required type="email" ref={(input) => this.getEmail = input}
           placeholder="Enter Email ID" /><br /><br />
-          <input required type="number" ref={(input) => this.getMobile = input}
+          <input required type="number" max={9999999999} ref={(input) => this.getMobile = input}
           placeholder="Enter Mobile Number" /><br /><br />
           <label>
             <input type="radio" value="admin" checked={this.state.role === "admin"} onChange={this.handleRoleChange} />

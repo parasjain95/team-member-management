@@ -6,42 +6,73 @@ class AddMember extends Component {
   constructor(){
     super();
     this.state = {
-      role: "regular"
+      newMember: {
+        fname: "",
+        lname: "",
+        email: "",
+        mobile: "",
+        role: "regular",
+      }
     };
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const fname = this.getFname.value;
-    const lname = this.getLname.value;
-    const email = this.getEmail.value;
-    const mobile = this.getMobile.value;
-    const role = this.state.role;
-    const data = {
+    
+    const data = { 
       id: new Date(),
-      fname,
-      lname,
-      email,
-      mobile,
-      role,
-      editing: false
+      ...this.state.newMember
     }
+
     this.props.dispatch({
       type: 'ADD_MEMBER',
       data
     })
-    this.getFname.value = '';
-    this.getLname.value = '';
-    this.getEmail.value = '';
-    this.getMobile.value = '';
+
     this.setState({
-      role: "regular"
+      newMember: {
+        fname: "",
+        lname: "",
+        email: "",
+        mobile: "",
+        role: "regular",
+      }
     });
   }
 
-  handleRoleChange = (e) => {
+  handleFnameChange = (e) => {
     this.setState({
-      role: e.target.value
+      newMember: {
+        ...this.state.newMember,
+        fname: e.target.value
+      }
+    });
+  }
+
+  handleLnameChange = (e) => {
+    this.setState({
+      newMember: {
+        ...this.state.newMember,
+        lname: e.target.value
+      }
+    });
+  }
+
+  handleEmailChange = (e) => {
+    this.setState({
+      newMember: {
+        ...this.state.newMember,
+        email: e.target.value
+      }
+    });
+  }
+
+  handleMobileChange = (e) => {
+    this.setState({
+      newMember: {
+        ...this.state.newMember,
+        mobile: e.target.value
+      }
     });
   }
 
@@ -50,25 +81,34 @@ class AddMember extends Component {
     console.log('cancel add');
   }
 
+  handleRoleChange = (e) => {
+    this.setState({
+      newMember: {
+        ...this.state.newMember,
+        role: e.target.value
+      }
+    });
+  }
+
   render() {
     return (
       <div className="post-container">
         <h1 className="post_heading">Add Member</h1>
         <form className="form" onSubmit={this.handleSubmit} >
-          <input required type="text" ref={(input) => this.getFname = input}
+          <input required type="text" value={this.state.newMember.fname} onChange={this.handleFnameChange}
           placeholder="Enter First Name" /><br /><br />
-          <input required type="text" ref={(input) => this.getLname = input}
+          <input required type="text" value={this.state.newMember.lname} onChange={this.handleLnameChange}
           placeholder="Enter Last Name" /><br /><br />
-          <input required type="email" ref={(input) => this.getEmail = input}
+          <input required type="email" value={this.state.newMember.email} onChange={this.handleEmailChange}
           placeholder="Enter Email ID" /><br /><br />
-          <input required type="number" max={9999999999} ref={(input) => this.getMobile = input}
+          <input required type="number" min={1000000000} max={9999999999} value={this.state.newMember.mobile} onChange={this.handleMobileChange}
           placeholder="Enter Mobile Number" /><br /><br />
           <label>
-            <input type="radio" value="admin" checked={this.state.role === "admin"} onChange={this.handleRoleChange} />
+            <input type="radio" value="admin" checked={this.state.newMember.role === "admin"} onChange={this.handleRoleChange} />
             Admin(can delete other members)
           </label>
           <label>
-            <input type="radio" value="regular" checked={this.state.role === "regular"} onChange={this.handleRoleChange} />
+            <input type="radio" value="regular" checked={this.state.newMember.role === "regular"} onChange={this.handleRoleChange} />
             Regular(can't delete other members)
           </label><br/><br/>
           <button>SAVE</button>

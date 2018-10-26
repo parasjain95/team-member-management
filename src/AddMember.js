@@ -76,11 +76,6 @@ class AddMember extends Component {
     });
   }
 
-  handleCancelAdd = (e) => {
-    e.preventDefault();
-    console.log('cancel add');
-  }
-
   handleRoleChange = (e) => {
     this.setState({
       newMember: {
@@ -88,6 +83,11 @@ class AddMember extends Component {
         role: e.target.value
       }
     });
+  }
+
+  handleCancelAdd = (e) => {
+    e.preventDefault();
+    console.log('cancel add');
   }
 
   render() {

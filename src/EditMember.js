@@ -6,30 +6,67 @@ class EditMember extends Component {
   constructor(props){
     super(props);
     this.state = {
-      role: this.props.member.role
+      editMember: this.props.member
     };
   }
 
   handleEdit = (e) => {
     e.preventDefault();
-    const newFname = this.getFname.value;
-    const newLname = this.getLname.value;
-    const newEmail = this.getEmail.value;
-    const newMobile = this.getMobile.value;
-    const newRole = this.state.role;
-    const data = {
-      newFname,
-      newLname,
-      newEmail,
-      newMobile,
-      newRole
+    const data = { 
+      ...this.state.editMember
     }
+
     this.props.dispatch({ type: 'UPDATE_MEMBER', id: this.props.member.id, data: data })
+  }
+
+  handleFnameChange = (e) => {
+    this.setState({
+      editMember: {
+        ...this.state.editMember,
+        fname: e.target.value
+      }
+    });
+  }
+
+  handleLnameChange = (e) => {
+    this.setState({
+      editMember: {
+        ...this.state.editMember,
+        lname: e.target.value
+      }
+    });
+  }
+
+  handleEmailChange = (e) => {
+    this.setState({
+      editMember: {
+        ...this.state.editMember,
+        email: e.target.value
+      }
+    });
+  }
+
+  handleMobileChange = (e) => {
+    this.setState({
+      editMember: {
+        ...this.state.editMember,
+        mobile: e.target.value
+      }
+    });
   }
 
   handleRoleChange = (e) => {
     this.setState({
       role: e.target.value
+    });
+  }
+
+  handleRoleChange = (e) => {
+    this.setState({
+      editMember: {
+        ...this.state.editMember,
+        role: e.target.value
+      }
     });
   }
 
@@ -43,20 +80,20 @@ class EditMember extends Component {
     <div key={this.props.member.id} className="post">
       <h1 className="post_heading">Edit Member</h1>
       <form className="form" onSubmit={this.handleEdit}>
-        <input required type="text" ref={(input) => this.getFname = input}
-        defaultValue={this.props.member.fname} placeholder="Enter First Name" /><br /><br />
-        <input required type="text" ref={(input) => this.getLname = input}
-        defaultValue={this.props.member.lname} placeholder="Enter Last Name" /><br /><br />
-        <input required type="email" ref={(input) => this.getEmail = input}
-        defaultValue={this.props.member.email} placeholder="Enter Email ID" /><br /><br />
-        <input required type="number" maxLength="10" ref={(input) => this.getMobile = input}
-        defaultValue={this.props.member.mobile} placeholder="Enter Mobile Number" /><br /><br />
+        <input required type="text" value={this.state.editMember.fname} onChange={this.handleFnameChange}
+         placeholder="Enter First Name" /><br /><br />
+        <input required type="text" value={this.state.editMember.lname} onChange={this.handleLnameChange}
+         placeholder="Enter Last Name" /><br /><br />
+        <input required type="email" value={this.state.editMember.email} onChange={this.handleEmailChange}
+         placeholder="Enter Email ID" /><br /><br />
+        <input required type="number" min={1000000000} max={9999999999} value={this.state.editMember.mobile} onChange={this.handleMobileChange}
+         placeholder="Enter Mobile Number" /><br /><br />
         <label>
-          <input type="radio" value="admin" checked={this.state.role==="admin"} onChange={this.handleRoleChange} />
+          <input type="radio" value="admin" checked={this.state.editMember.role==="admin"} onChange={this.handleRoleChange} />
           Admin(can delete other members)
         </label>
         <label>
-          <input type="radio" value="regular" checked={this.state.role==="regular"} onChange={this.handleRoleChange} />
+          <input type="radio" value="regular" checked={this.state.editMember.role==="regular"} onChange={this.handleRoleChange} />
           Regular(can't delete other members)
         </label><br/><br/>
         <button>SAVE</button><br/><button onClick={this.handleCancelEdit}>CANCEL</button>

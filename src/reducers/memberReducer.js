@@ -13,11 +13,11 @@ const memberReducer = (state = [], action) => {
         if (member.id === action.id) {
           return {
             ...member,
-            fname: action.data.newFname,
-            lname: action.data.newLname,
-            email: action.data.newEmail,
-            mobile: action.data.newMobile,
-            role: action.data.newRole,
+            fname: action.data.fname,
+            lname: action.data.lname,
+            email: action.data.email,
+            mobile: action.data.mobile,
+            role: action.data.role,
             editing: !member.editing
           }
         } else return member;

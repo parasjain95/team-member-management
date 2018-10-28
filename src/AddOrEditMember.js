@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import {
+  addMember,
+  updateMember,
+  cancel
+} from "./actions/memberActions";
+
 class AddOrEditMember extends Component {
 
   constructor(props){
@@ -26,8 +32,6 @@ class AddOrEditMember extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("submitting");
-
     if(!!this.props.editMemberId){
       const data = {
         ...this.state.tempMember
@@ -35,10 +39,7 @@ class AddOrEditMember extends Component {
 
       console.log(data);
 
-      this.props.dispatch({
-        type: 'UPDATE_MEMBER',
-        data
-      })
+      this.props.updateMember(data);
     }else{
       const data = { 
         ...this.state.tempMember,
@@ -47,10 +48,7 @@ class AddOrEditMember extends Component {
 
       console.log(data);
 
-      this.props.dispatch({
-        type: 'ADD_MEMBER',
-        data
-      })
+      this.props.addMember(data);
     }
 
     this.setState({
@@ -111,7 +109,7 @@ class AddOrEditMember extends Component {
 
   handleCancel = (e) => {
     e.preventDefault();
-    this.props.dispatch({ type: 'CANCEL'})
+    this.props.cancecl();
   }
 
   render() {
@@ -141,4 +139,11 @@ class AddOrEditMember extends Component {
     );
   }
 }
-export default connect()(AddOrEditMember);
+
+const mapDispatchToProps = dispatch => ({
+  addMember: (data) => dispatch(addMember(data)),
+  updateMember: (data) => dispatch(updateMember(data)),
+  cancel: () => dispatch(cancel())
+});
+
+export default connect(null, mapDispatchToProps)(AddOrEditMember);

@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import Member from './Member';
 import AddOrEditMember from './AddOrEditMember';
 
+import {
+  addingMember
+} from "./actions/memberActions";
+
 class AllMembers extends Component {
 
   handleAdd = (e) => {
-    this.props.dispatch({
-      type: 'ADDING_MEMBER'
-    })
+    this.props.addingMember();
   }
 
   render() {
@@ -44,4 +46,9 @@ const mapStateToProps = (state) => {
     addFlag: state.addFlag
   }
 }
-export default connect(mapStateToProps)(AllMembers);
+
+const mapDispatchToProps = dispatch => ({
+  addingMember: () => dispatch(addingMember()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllMembers);

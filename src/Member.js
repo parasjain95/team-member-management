@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 class Member extends Component {
 render() {
 return (
@@ -14,7 +15,7 @@ return (
     }
     >Edit</button>
     <button className="delete"
-    onClick={() => this.props.dispatch({ type: 'DELETE_MEMBER', id: this.props.member.id })}
+    onClick={() => this.props.dispatch({ type: 'DELETE_MEMBER', id: this.props.member.id })} 
     >Delete</button>
   </div>
 </div>
